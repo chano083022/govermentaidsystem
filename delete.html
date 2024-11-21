@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>DELETE Applicant</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    .dashboard {
+      display: flex;
+      flex: 1;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #ffffff;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      background-color: #00d4ff;
+      color: white;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar nav ul li a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active {
+      background-color: #00d4ff;
+      color: white;
+    }
+
+    .sidebar nav ul li a .icon {
+      margin-right: 10px;
+    }
+
+    .logout-container {
+      margin-top: auto; 
+      padding-top: 20px;
+    }
+
+    /* Logout Button */
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%; 
+    }
+
+    .logout-btn:hover {
+      background-color: #d32f2f;
+    }
+
+    .logout-btn .icon {
+      margin-right: 10px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-left: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-info .user-id {
+      margin-right: 10px;
+    }
+
+    .user-info .user-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #00d4ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .search-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-section input {
+      padding: 8px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      width: 150px;
+    }
+
+    .search-section button {
+      padding: 8px;
+      background-color: #00d4ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .search-section button:hover {
+      background-color: #0066cc;
+    }
+
+.table-section {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  max-height: 320px;
+  overflow-y: auto;  
+}
+
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .data-table th {
+      background-color: #00d4ff;
+      color: white;
+    }
+
+    .data-table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .action-button {
+      padding: 8px 12px;
+      background-color: #00d4ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .action-button:hover {
+      background-color: #008bbf;
+    }
+
+    .reason-section {
+      margin-top: 20px;
+    }
+
+    .reason-section label {
+      font-weight: bold;
+    }
+
+    .reason-section textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      height: 80px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .reason-section button {
+      width: 100%;
+      padding: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .reason-section button:hover {
+      background-color: #0066cc;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="logo">Government Aid Monitoring System
+    </div>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html" ><i class="icon">🏠</i> Dashboard</a></li>
+          <li><a href="add.html"><i class="icon">➕</i> Add Applicant</a></li>
+          <li><a href="update.html"><i class="icon">✏️</i> Update Applicant</a></li>
+          <li><a href="#" class="active"><i class="icon">🗑️</i> Delete Applicant</a></li>
+          <li><a href="log.html"><i class="icon">🔍</i> View Log</a></li>
+        </ul>
+      </nav>
+
+      <div class="logout-container">
+        <a href="login.html" class="logout-btn">
+            <h>Logout</h>
+          
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <h1>Welcome, Encoder! Going to DELETE Applicant? </h1>
+        <div class="user-info">
+          <span class="user-id">A-324232</span>
+          <div class="user-avatar">👤</div>
+        </div>
+      </header>
+
+      <div class="search-section">
+        <input type="text" id="national-id" placeholder="National ID">
+        <button class="search-button" onclick="searchApplicant()">🔍</button>
+      </div>
+
+      <div class="table-section">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Select</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Encoder</th>
+              <th>Date</th>
+              <th>National ID</th>
+              <th>Household No</th>
+              <th>Aid Type</th>
+            </tr>
+          </thead>
+          <tbody id="log-entries">
+
+            <tr>
+              <td><input type="checkbox" class="delete-checkbox"></td>
+              <td>Jane Smith</td>
+              <td>Approved Applicant</td>
+              <td>Carlos Reyes</td>
+              <td>11/17/2024, 8:35:12 PM</td>
+              <td>123-45-6789</td>
+              <td>101</td>
+              <td>Food Assistance</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="delete-checkbox"></td>
+              <td>John Doe</td>
+              <td>Approved Applicant</td>
+              <td>Maria Lopez</td>
+              <td>11/18/2024, 9:12:45 AM</td>
+              <td>987-65-4321</td>
+              <td>102</td>
+              <td>Medical Aid</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td>John Doe</td>
+                <td>Approved Applicant</td>
+                <td>Maria Lopez</td>
+                <td>11/18/2024, 9:12:45 AM</td>
+                <td>987-65-4321</td>
+                <td>102</td>
+                <td>Medical Aid</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td>John Doe</td>
+                <td>Approved Applicant</td>
+                <td>Maria Lopez</td>
+                <td>11/18/2024, 9:12:45 AM</td>
+                <td>987-65-4321</td>
+                <td>102</td>
+                <td>Medical Aid</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td>John Doe</td>
+                <td>Approved Applicant</td>
+                <td>Maria Lopez</td>
+                <td>11/18/2024, 9:12:45 AM</td>
+                <td>987-65-4321</td>
+                <td>102</td>
+                <td>Medical Aid</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td>John Doe</td>
+                <td>Approved Applicant</td>
+                <td>Maria Lopez</td>
+                <td>11/18/2024, 9:12:45 AM</td>
+                <td>987-65-4321</td>
+                <td>102</td>
+                <td>Medical Aid</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td>John Doe</td>
+                <td>Approved Applicant</td>
+                <td>Maria Lopez</td>
+                <td>11/18/2024, 9:12:45 AM</td>
+                <td>987-65-4321</td>
+                <td>102</td>
+                <td>Medical Aid</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reason-section">
+        <label for="reason">Reason for Deleting Applicant:</label>
+        <textarea id="reason" placeholder="Enter reason for deleting this applicant..."></textarea>
+        <button onclick="deleteApplicant()">Delete Selected Applicant</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function searchApplicant() {
+      const nationalId = document.getElementById('national-id').value;
+      const logEntries = document.getElementById('log-entries');
+      let found = false;
+
+      for (let row of logEntries.rows) {
+        let cells = row.cells;
+        if (cells[5].innerText === nationalId) {
+          found = true;
+          row.style.backgroundColor = '#ffecb3'; 
+        }
+      }
+
+      if (!found) {
+        alert('No applicant found with this National ID.');
+      }
+    }
+
+    function deleteApplicant() {
+      const reason = document.getElementById('reason').value;
+      if (reason.trim() === '') {
+        alert('Please provide a reason for deletion.');
+        return;
+      }
+
+      const checkboxes = document.querySelectorAll('.delete-checkbox');
+      checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+          const row = checkbox.closest('tr');
+          row.remove();
+        }
+      });
+
+      alert('Selected applicants have been deleted.');
+    }
+  </script>
+</body>
+</html>

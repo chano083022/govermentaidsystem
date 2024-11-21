@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background-color: #f8f9fa;
+      display: flex;
+      height: 100vh;
+    }
+    
+    .dashboard {
+      display: flex;
+      width: 100%;
+    }
+    
+    .sidebar {
+      width: 240px;
+      background-color: #ffffff;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      background-color: #00d4ff;
+      color: white;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .sidebar nav ul li {
+      margin-bottom: 15px;
+    }
+    
+    .sidebar nav ul li a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active {
+      background-color: #00d4ff;
+      color: white;
+    }
+    
+    .sidebar nav ul li a .icon {
+      margin-right: 10px;
+    }
+    
+    .logout-container {
+      margin-top: auto; 
+      padding-top: 20px; 
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%; 
+    }
+
+    .logout-btn:hover {
+      background-color: #d32f2f;
+    }
+
+    .logout-btn .icon {
+      margin-right: 10px;
+    }
+    
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-info .user-id {
+      margin-right: 10px;
+    }
+    
+    .user-info .user-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #00d4ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .table-section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    
+    .table-controls {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .table-controls .dropdown,
+    .table-controls .search-box,
+    .table-controls .search-button {
+      margin-right: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .table-container {
+      max-height: 550px; 
+      overflow-y: auto; 
+    }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    
+    .data-table th,
+    .data-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .data-table th {
+      background-color: #00d4ff;
+      color: white;
+    }
+    
+    .data-table tr:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .action-button {
+      padding: 8px 12px;
+      background-color: #00d4ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .action-button:hover {
+      background-color: #008bbf;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="logo">Government Aid Monitoring System</div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active"><i class="icon">🏠</i> Dashboard</a></li>
+          <li><a href="add.html"><i class="icon">➕</i> Add Applicant</a></li>
+          <li><a href="update.html"><i class="icon">✏️</i> Update Applicant</a></li>
+          <li><a href="delete.html"><i class="icon">🗑️</i> Delete Applicant</a></li>
+          <li><a href="log.html"><i class="icon">🔍</i> View Log</a></li>
+        </ul>
+      </nav>
+      <div class="logout-container">
+        <a href="login.html" class="logout-btn">
+            <h>Logout</h>
+          
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <h1>Welcome, Encoder! to Government Aid Monitoring System</h1>
+        <div class="user-info">
+          <span class="user-id">A-324232</span>
+          <div class="user-avatar">👤</div>
+        </div>
+      </header>
+
+      <section class="table-section">
+        <div class="table-controls">
+          <select class="dropdown">
+            <option>Applicant Status</option>
+            <option>Approved</option>
+            <option>Pending</option>
+            <option>Rejected</option>
+          </select>
+          <input type="text" placeholder="Search..." class="search-box">
+          <button class="search-button">🔍</button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>National ID No</th>
+                <th>Name</th>
+                <th>Aid Type</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>0234-5015-151</td>
+                <td>Juan Dela Cruz</td>
+                <td>DSWD-4P's</td>
+                <td>Pending</td>
+                <td>2024-11-15</td>
+                <td>
+                  <button class="action-button">Actions ⬇️</button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
